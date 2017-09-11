@@ -5,7 +5,6 @@ var bodyparser = require('body-parser');
 var cors = require('cors');
 var path = require('path');
 var multer = require('multer');
-var upload = multer({ dest: 'uploads/' })
 var app = express();
 
 //includes to the backend API
@@ -39,6 +38,7 @@ app.use(bodyparser.json());
 
 //This is needed to determine the relative path used for res.send
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 
 //sets the path of the included backend file
