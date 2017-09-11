@@ -1,9 +1,33 @@
 const express = require('express');
-var app = express();
+var multer = require('multer');
 // set the directory for the uploads to the uploaded to
-var DIR = './uploads/';
  
 const router = express.Router();
+
+
+var storage = multer.diskStorage({
+	destination: function (req, file, cb) {
+	  cb(null, 'uploads/')
+	},
+	filename: function (req, file, cb) {
+	  cb(null, file.fieldname + '-' + Date.now() + '.jpg')
+	}
+  });
+  
+  var upload = multer({ storage: storage }).single('imageupload');
+
+router.post('/imageupload', function(req, res){
+	upload(req, res, function(err){
+		if (err)
+			console.log(err);
+	})
+	res.json({
+		success: true,
+		message: 'Image Uploaded!'
+	})
+});
+
+
 
 const Image = require('../models/image');
 
@@ -32,17 +56,5 @@ router.post('/image',(req, res, next)=>{
 });
 
 
-router.post('/fileupload', function (req, res, next) {
-    var path = '';
-    upload(req, res, function (err) {
-       if (err) {
-         // An error occurred when uploading
-         console.log(err);
-         return res.status(422).send("an Error occured")
-       }  
-      // No error occured.
-       //path = req.file.path;
-       return res.send("Upload Completed for "); 
- })});  
 
 module.exports = router;
