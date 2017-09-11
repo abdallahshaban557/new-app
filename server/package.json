@@ -1,0 +1,21 @@
+{
+  "name": "app-test",
+  "version": "1.0.0",
+  "description": "for mariella",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "abdallah shaban",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "cors": "^2.8.4",
+    "express": "^4.15.4",
+    "fs": "0.0.1-security",
+    "mongoose": "^4.11.8",
+    "multer": "^1.3.0"
+  },
+  "devDependencies": {
+  }
+}
