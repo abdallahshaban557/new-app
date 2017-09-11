@@ -3,7 +3,6 @@ var app = express();
 // set the directory for the uploads to the uploaded to
 var DIR = './uploads/';
  
- 
 const router = express.Router();
 
 const Image = require('../models/image');
@@ -31,9 +30,6 @@ router.post('/image',(req, res, next)=>{
 		}
 	});
 });
-
-
-
 
 
 router.post('/fileupload', function (req, res, next) {
