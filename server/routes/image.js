@@ -1,4 +1,5 @@
 const express = require('express');
+<<<<<<< HEAD
 //require multer for the file uploads
 var multer = require('multer');
 var app = express();
@@ -6,12 +7,17 @@ var app = express();
 var DIR = './uploads/';
  
  
+=======
+>>>>>>> parent of ce12a675... added mutler code
 const router = express.Router();
 
 const Image = require('../models/image');
 
+<<<<<<< HEAD
 var upload = multer({dest: DIR});
 
+=======
+>>>>>>> parent of ce12a675... added mutler code
 router.get('/image', (req, res, next)=>{
 	Image.find(function(err, resultimage){
 		res.json(resultimage);
@@ -36,6 +42,7 @@ router.post('/image',(req, res, next)=>{
 	});
 });
 
+<<<<<<< HEAD
 
 app.use(multer({
 	dest: DIR,
@@ -63,5 +70,7 @@ router.post('/fileupload', function (req, res, next) {
        //path = req.file.path;
        return res.send("Upload Completed for "); 
  })});  
+=======
+>>>>>>> parent of ce12a675... added mutler code
 
 module.exports = router;
