@@ -1,54 +1,49 @@
-//import modules
 var express = require('express');
-var mongoose = require('mongoose');
-var bodyparser = require('body-parser');
-var cors = require('cors');
-var path = require('path');
 var multer = require('multer');
+var fs = require('fs');
 var app = express();
-
-//includes to the backend API
-const route = require('./routes/route.js');
-const users = require('./routes/users.js');
-const image = require('./routes/image.js');
-
-//port number for backend
-const port = 3000;
-
-//Connect to MongoDB
-mongoose.connection.openUri('mongodb://abdallahshaban:whatyousaid@ds149433.mlab.com:49433/picture-app');
-
-
-//connection successful message
-mongoose.connection.on('connected', ()=>{
-	console.log('Connected to DB');
-})
-
-//connection unsuccessful message
-mongoose.connection.on('error', ()=>{
-	if(err)
-	{
-		console.log('error m3allem' + err);
-	}
+ 
+var DIR = './uploads/';
+ 
+var upload = multer({dest: DIR});
+ 
+app.use(function (req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', 'http://valor-software.github.io');
+  res.setHeader('Access-Control-Allow-Methods', 'POST');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  next();
 });
-
-app.use(cors());
-
-app.use(bodyparser.json());
-
-//This is needed to determine the relative path used for res.send
-app.use(express.static(path.join(__dirname, 'public')));
-
-
-//sets the path of the included backend file
-app.use('/api', route);
-app.use('/users', users);
-app.use('/image', image);
-app.get('/',(req, res)=>{
-	res.send('foobar');
+ 
+app.use(multer({
+  dest: DIR,
+  rename: function (fieldname, filename) {
+    return filename + Date.now();
+  },
+  onFileUploadStart: function (file) {
+    console.log(file.originalname + ' is starting ...');
+  },
+  onFileUploadComplete: function (file) {
+    console.log(file.fieldname + ' uploaded to  ' + file.path);
+  }
+}));
+ 
+app.get('/api', function (req, res) {
+  res.end('file catcher example');
 });
-
-app.listen(port,()=>{
-	console.log('server started at port ' + port);
-
+ 
+app.post('/api', function (req, res) {
+  upload(req, res, function (err) {
+    if (err) {
+      return res.end(err.toString());
+    }
+ 
+    res.end('File is uploaded');
+  });
+});
+ 
+var PORT = process.env.PORT || 3000;
+ 
+app.listen(PORT, function () {
+  console.log('Working on port ' + PORT);
 });

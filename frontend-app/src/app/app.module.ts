@@ -8,16 +8,19 @@ import { RouterModule, Routes }   from '@angular/router';
 import { HttpModule }    from '@angular/http'
 import { AppComponent } from './app.component';
 import { TopnavComponent } from './topnav/topnav.component';
+import { ImageuploadComponent } from './imageupload/imageupload.component';
 
 
  const appRoutes: Routes = [
    {path:'', component: TopnavComponent},
+   {path:'upload', component: ImageuploadComponent}
 ]
 
 @NgModule({
   declarations: [
     AppComponent,
     TopnavComponent,
+    ImageuploadComponent,
   ],
   imports: [
     BrowserModule,

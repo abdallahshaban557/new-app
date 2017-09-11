@@ -1,15 +1,16 @@
 const express = require('express');
 //require multer for the file uploads
 var multer = require('multer');
+var app = express();
 // set the directory for the uploads to the uploaded to
-var DIR = '../uploads/';
-
-
+var DIR = './uploads/';
+ 
+ 
 const router = express.Router();
 
 const Image = require('../models/image');
 
-var upload = multer({dest: DIR}).single('photo');
+var upload = multer({dest: DIR});
 
 router.get('/image', (req, res, next)=>{
 	Image.find(function(err, resultimage){
@@ -35,6 +36,21 @@ router.post('/image',(req, res, next)=>{
 	});
 });
 
+
+app.use(multer({
+	dest: DIR,
+	rename: function (fieldname, filename) {
+	  return filename + Date.now();
+	},
+	onFileUploadStart: function (file) {
+	  console.log(file.originalname + ' is starting ...');
+	},
+	onFileUploadComplete: function (file) {
+	  console.log(file.fieldname + ' uploaded to  ' + file.path);
+	}
+  }));
+
+
 router.post('/fileupload', function (req, res, next) {
     var path = '';
     upload(req, res, function (err) {
@@ -44,8 +60,8 @@ router.post('/fileupload', function (req, res, next) {
          return res.status(422).send("an Error occured")
        }  
       // No error occured.
-       path = req.file.path;
-       return res.send("Upload Completed for "+path); 
- });  
+       //path = req.file.path;
+       return res.send("Upload Completed for "); 
+ })});  
 
 module.exports = router;
