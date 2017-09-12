@@ -1,2 +1,14 @@
-<input type="file" ng2FileSelect [uploader]="uploader" />
-<button type="button" class="btn btn-success btn-xs" (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
+ <div id="spinner" class="spinner">
+</div>
+ <div class="container">
+ <h1>{{title}}</h1>
+ <form>
+   <div class="form-group">
+        <input type="file" id="imageupload" name="imageupload" class="btn btn-success" />
+        <input type="button"  class="btn btn-primary" (click)="upload()" value="imageupload" />
+   </div>
+       
+ </form> 
+
+ </div>
+ 

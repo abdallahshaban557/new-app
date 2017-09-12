@@ -9,6 +9,7 @@ import { HttpModule }    from '@angular/http'
 import { AppComponent } from './app.component';
 import { TopnavComponent } from './topnav/topnav.component';
 import { ImageuploadComponent } from './imageupload/imageupload.component';
+import { FileUploaderService } from './imageupload/Service/file-uploader.service'
 
 
  const appRoutes: Routes = [
@@ -28,7 +29,7 @@ import { ImageuploadComponent } from './imageupload/imageupload.component';
     RouterModule.forRoot(appRoutes),
     HttpModule
   ],
-  providers: [],
+  providers: [FileUploaderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
