@@ -1,14 +1,5 @@
- <div id="spinner" class="spinner">
-</div>
  <div class="container">
  <h1>{{title}}</h1>
- <form>
-   <div class="form-group">
-        <input type="file" id="imageupload" name="imageupload" class="btn btn-success" />
-        <input type="button"  class="btn btn-primary" (click)="upload()" value="imageupload" />
-   </div>
-       
- </form> 
-
+ <input type="file" (change)="fileChange($event)" placeholder="Upload file" accept=".pdf,.doc,.docx">
  </div>
  
