@@ -5,6 +5,8 @@ import { Http, Response, RequestOptions } from '@angular/http';
 import "rxjs/add/operator/do";
 //import the map function to be used with the http library
 import "rxjs/add/operator/map";
+import { ImageUploadService } from './Service/imageupload.service';
+
 
 const uploadurl = 'localhost:3000/image/fileupload';
 
@@ -15,9 +17,10 @@ const uploadurl = 'localhost:3000/image/fileupload';
 })
 export class ImageuploadComponent implements OnInit {
 
-  constructor(private http: Http, private el: ElementRef) { }
+  constructor(private http: Http, private el: ElementRef, private imageuploadservice: ImageUploadService) { }
 
   ngOnInit() {
+   
   }
 
   fileChange(event) {
@@ -28,21 +31,5 @@ export class ImageuploadComponent implements OnInit {
     formData.append('imageupload' ,fileList[0]);
     console.log(formData);
     this.http.post(URL, formData).subscribe((success) => alert('success'), (error) => alert(error));
-    // if(fileList.length > 0) {
-    //     let file: File = fileList[0];
-    //     let formData:FormData = new FormData();
-    //     formData.append('uploadFile', file, file.name);
-    //     let headers = new Headers();
-    //     /** No need to include Content-Type in Angular 4 */
-    //     headers.append('Accept', 'application/json');
-    //     let options = new RequestOptions({ headers: headers });
-    //     this.http.post(`${this.apiEndPoint}`, formData, options)
-    //         .map(res => res.json())
-    //         .catch(error => Observable.throw(error))
-    //         .subscribe(
-    //             data => console.log('success'),
-    //             error => console.log(error)
-    //         )
-    // }
 }
 }

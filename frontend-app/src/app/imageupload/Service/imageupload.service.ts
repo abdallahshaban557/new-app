@@ -10,8 +10,8 @@ export class ImageUploadService {
 constructor(private _http: Http) {
   
       }
-  
-        public  uploadImage(formdata: any ) {
+
+      public  uploadImage(formdata: any ) {
           let _url: string = 'http://localhost:3000/image/imageupload';
           return this._http.post(_url, formdata)
           .catch(this._errorHandler) ;
