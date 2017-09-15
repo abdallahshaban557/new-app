@@ -41,7 +41,6 @@ app.use(function(req, res, next) {
 	});
 
 app.use(bodyparser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
 //This is needed to determine the relative path used for res.send
 app.use(express.static(path.join(__dirname, 'public')));
